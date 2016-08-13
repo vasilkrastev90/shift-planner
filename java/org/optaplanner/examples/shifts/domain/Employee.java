@@ -13,8 +13,23 @@ public class Employee {
 		this.totalAmountOfHoliday = 0;
 	}
 
+	public Employee() {
+	}
+	
 	public String getName() {
 		return name;
+	}
+
+	public boolean[] getUnavailable() {
+		return unavailable;
+	}
+
+	public void setUnavailable(boolean[] unavailable) {
+		this.unavailable = unavailable;
+	}
+
+	public void setTotalAmountOfHoliday(int totalAmountOfHoliday) {
+		this.totalAmountOfHoliday = totalAmountOfHoliday;
 	}
 
 	public void setName(String name) {

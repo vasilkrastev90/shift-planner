@@ -1,14 +1,25 @@
 package org.optaplanner.examples.shifts.domain;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.optaplanner.examples.common.app.LoggingMain;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
+import org.optaplanner.examples.shifts.views.EmployeeView;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ShiftTimeTableGenerator extends LoggingMain {
 
@@ -60,6 +71,31 @@ public class ShiftTimeTableGenerator extends LoggingMain {
 		np.setUnavailable(13, true);
 		
 		ArrayList<Employee> employees = new ArrayList<Employee>(Arrays.asList(cvk, hrm,dk,np,bm,ma,md,vv,kd));
+		ObjectMapper om = new ObjectMapper();
+		try {
+			ClassLoader classLoader = getClass().getClassLoader();
+			employees = om.readValue(new File(classLoader.getResource("org/optaplanner/examples/shifts/solver/employees.json").getFile()), new TypeReference<ArrayList<Employee>>() {});
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//angel
+		JFrame f = new JFrame();
+		f.setSize(700, 700);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel p = new JPanel();
+		JButton button1 = new JButton("Избери година/месец");
+		p.add(button1);
+		JButton button2 = new JButton("Изчисли");
+		p.add(button2);
+		EmployeeView ev = new EmployeeView(employees,2016,7);
+		p.add(ev);
+		f.add(p);
+		f.setVisible(true);
+		//angel
 		//employees.sort(new EmployeeStrengthComparator2());
 		this.numberOfShiftsPerEmployee0 = new HashMap<Employee,Integer>();
 		for (Employee employee : employees) {
