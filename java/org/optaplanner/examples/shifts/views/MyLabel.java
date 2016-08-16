@@ -1,34 +1,46 @@
 package org.optaplanner.examples.shifts.views;
 
 import java.awt.Color;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.JLabel;
 
-public class MyLabel extends JLabel implements MouseListener {
+import org.optaplanner.examples.shifts.domain.Employee;
+
+public class MyLabel extends JLabel implements MouseListener{
 
 	boolean b;
+	int day;
+	Employee emp;
+	HashMap<Integer,Integer> map;
 	
-	public MyLabel(String s) {
-		super(s,JLabel.CENTER);
+	public MyLabel(int day, Employee e, HashMap<Integer,Integer> map) {
+		super("" + day,JLabel.CENTER);
 		b=true;
 		addMouseListener(this);
+		this.day = day;
+		emp = e;
+		this.map = map;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	  if(b) {
 		  this.setForeground(Color.RED);
+		  emp.setUnavailable(map.get(day), true);
 		  b=false;
 	  }
 	  else {
 		  this.setForeground(Color.BLACK);
+		  emp.setUnavailable(map.get(day),false);
 		  b=true;
 	  }
-		
+	  System.out.println(emp.getName());
+	for (boolean b : emp.getUnavailable()) {
+		if(b) System.out.println(day + " ");
+	}
 	}
 
 	@Override

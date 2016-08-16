@@ -1,70 +1,101 @@
 package org.optaplanner.examples.shifts.views;
 
-import java.awt.GridLayout;
-import java.util.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import javax.swing.*;
+public class GridBagLayoutDemo {
+    //final static boolean shouldFill = true;
+   // final static boolean shouldWeightX = true;
+   // final static boolean RIGHT_TO_LEFT = false;
 
-public class test {
-	
-	public static void main(String[] args) {
-		
-		
-		int year, month;
-		year = 2016;
-		month = 8;
-		
-		Calendar calendar = new GregorianCalendar();
-		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
-		HashMap<Integer,Integer> workdays = new HashMap<Integer,Integer>();
-		int workday = 1;
-		
-		for(int i = 1; i <= daysInMonth; i++) {
-			
-			calendar.set(year, month - 1, i);	
-			if(!(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
-				
-				workdays.put(Integer.valueOf(i), Integer.valueOf(workday));
-				workday++;
-			}
-		}
-		
-		JFrame f = new JFrame();
-		f.setSize(700, 700);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		CalendarPanel cp = new CalendarPanel(2016, 7);
-		f.add(cp);
-		
-		/*JPanel p = new JPanel();
-		
-		HashMap<String,Integer> mapyears = new HashMap<String, Integer>();
-		String years[] = {"2014","2015","2016","2017","2018"};
-		JComboBox<String> listYears = new JComboBox<String>(years);
-		int y=2014;
-		for (String s : years) {
-			mapyears.put(s, y);
-			y++;
-		}
-		HashMap<String,Integer> mapmonths = new HashMap<String, Integer>();
-		String months[] ={"January","February","March","April","May","June","July","August","September","October","November","December"};
-		JComboBox<String> listMonths = new JComboBox<String>(months);
-		int m=0;
-		for (String s : months) {
-			mapmonths.put(s, m);
-			m++;
-		}
-		Listener l = new Listener(f,listYears,mapyears,listMonths,mapmonths,calendar);
-		JButton button = new JButton("Set");
-		button.addActionListener(l);
-		
-		p.add(listYears);
-		p.add(listMonths);
-		p.add(button);
-		f.add(p);*/
-		f.setVisible(true);
-		
-		
-	}
+    public static void addComponentsToPane(Container pane) {
+       // if (RIGHT_TO_LEFT) {
+       //     pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+       // }
+
+        JButton button;
+        pane.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+       // if (shouldFill) {
+       //     //natural height, maximum width
+       //     c.fill = GridBagConstraints.HORIZONTAL;
+     //   }
+
+        button = new JButton("Button 1");
+      //  if (shouldWeightX) {
+      //      c.weightx = 0.5;
+      //  }
+        c.gridx = 0;
+        c.gridy = 0;
+        pane.add(button, c);
+
+        button = new JButton("Button 2");
+        c.gridx = 1;
+        c.gridy = 0;
+        pane.add(button, c);
+
+        JPanel p = new JPanel();
+        p.setPreferredSize(new Dimension(500, 500));
+        c.gridwidth = 2;
+        c.gridheight = 4;
+        pane.add(p, c);
+       /* button = new JButton("Button 3");
+        c.gridx = 2;
+        c.gridy = 0;
+        pane.add(button, c);
+
+        button = new JButton("Long-Named Button 4");
+        c.ipady = 40;      //make this component tall
+        c.weightx = 0.0;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+        pane.add(button, c);
+
+        button = new JButton("5");
+        c.ipady = 0;       //reset to default
+        c.weighty = 1.0;   //request any extra vertical space
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        c.insets = new Insets(10,0,0,0);  //top padding
+        c.gridx = 1;       //aligned with button 2
+        c.gridwidth = 2;   //2 columns wide
+        c.gridy = 2;       //third row
+        pane.add(button, c);*/
+    }
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event-dispatching thread.
+     */
+    private static void createAndShowGUI() {
+        //Make sure we have nice window decorations.
+        JFrame.setDefaultLookAndFeelDecorated(true);
+
+        //Create and set up the window.
+        JFrame frame = new JFrame("GridBagLayoutDemo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Set up the content pane.
+        addComponentsToPane(frame.getContentPane());
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
+    }
 }
