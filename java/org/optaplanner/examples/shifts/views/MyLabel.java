@@ -37,12 +37,7 @@ public class MyLabel extends JLabel implements MouseListener{
 		  emp.setUnavailable(map.get(day),false);
 		  b=true;
 	  }
-	  System.out.println(emp.getName());
-	for (boolean b : emp.getUnavailable()) {
-		if(b) System.out.println(day + " ");
 	}
-	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub

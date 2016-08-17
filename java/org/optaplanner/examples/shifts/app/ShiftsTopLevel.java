@@ -81,12 +81,14 @@ public class ShiftsTopLevel {
 		button1.addActionListener(l2);
 		c.gridx=0;
 		c.gridy=0;
+		c.gridwidth=2;
 		p.add(button1,c);
 		
 		JButton button2 = new JButton("Изчисли");
 		button2.addActionListener(new Listener3(employees, map.keySet().size(),mapreverse,calendar));
-		c.gridx=1;
+		c.gridx=2;
 		c.gridy=0;
+		c.gridwidth=2;
 		p.add(button2,c);
 		c.gridx=0;
 		c.gridy=1;
@@ -124,7 +126,10 @@ public class ShiftsTopLevel {
 		List<Shift> listOfShifts = shifts.getListOfShifts();
 
 		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(mapreverse.size() + 1, 5));
 		p.add(new JLabel(""),JLabel.CENTER);
@@ -149,9 +154,7 @@ public class ShiftsTopLevel {
 			
 			
 		}
-		f.add(p);
-		f.setVisible(true);
-		f.pack();
+		
 		for (Employee employee : ShiftTimeTableGenerator.numberOfShiftsPerEmployee0.keySet()) {
 			ShiftTimeTableGenerator.numberOfShiftsPerEmployee0.put(employee, 0);
 			ShiftTimeTableGenerator.numberOfShiftsPerEmployee1.put(employee, 0);
@@ -167,6 +170,26 @@ public class ShiftsTopLevel {
 					ShiftTimeTableGenerator.numberOfShiftsPerEmployee1.get(shift.getReceptionAfternoon1()) + 1);
 		}
 
-        
+		JPanel jp = new JPanel();
+		jp.setLayout(new GridLayout(ShiftTimeTableGenerator.numberOfShiftsPerEmployee0.keySet().size()+1, 3));
+		jp.add(new JLabel("",JLabel.CENTER));
+		jp.add(new JLabel("Терминал",JLabel.CENTER));
+		jp.add(new JLabel("Рецепция",JLabel.CENTER));
+		for (Employee employee : ShiftTimeTableGenerator.numberOfShiftsPerEmployee0.keySet()) {
+			jp.add(new JLabel(employee.getName(),JLabel.CENTER));
+			jp.add(new JLabel(""+ShiftTimeTableGenerator.numberOfShiftsPerEmployee0.get(employee),JLabel.CENTER));
+			jp.add(new JLabel(""+ShiftTimeTableGenerator.numberOfShiftsPerEmployee1.get(employee),JLabel.CENTER));
+		}
+		c.gridx =0;
+		c.gridy =0;
+		
+		mainPanel.add(p,c);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.WEST;
+		mainPanel.add(jp,c);
+		f.add(mainPanel);
+		f.setVisible(true);
+		f.pack();
 	}
 }

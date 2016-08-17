@@ -30,7 +30,7 @@ class CalendarPanel extends JPanel
 	  for(int i = 1; i != dayofweek; i++) {
 		  add(new JLabel("",JLabel.CENTER));
 	  }
-	  System.out.println(gc.getActualMaximum(Calendar.DAY_OF_MONTH));
+	  
 	  while(day <= gc.getActualMaximum(Calendar.DAY_OF_MONTH) && gc.get(Calendar.MONTH)==month) {
 		  
 		  if((!(gc.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY || 

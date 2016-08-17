@@ -28,7 +28,6 @@ public class Listener2 implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JFrame f = new JFrame();
 		f.setSize(200, 200);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel p = new JPanel();
 		
