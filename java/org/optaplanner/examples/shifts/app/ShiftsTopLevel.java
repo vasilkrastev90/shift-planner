@@ -27,8 +27,8 @@ import org.optaplanner.examples.shifts.domain.Shift;
 import org.optaplanner.examples.shifts.domain.ShiftTimeTableGenerator;
 import org.optaplanner.examples.shifts.domain.ShiftTimetable;
 import org.optaplanner.examples.shifts.views.EmployeeView;
-import org.optaplanner.examples.shifts.views.Listener2;
-import org.optaplanner.examples.shifts.views.Listener3;
+import org.optaplanner.examples.shifts.views.listeners.InitiateCalculationListener;
+import org.optaplanner.examples.shifts.views.listeners.RequestMonthSelectionListener;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -77,7 +77,7 @@ public class ShiftsTopLevel {
 		jp.setPreferredSize(new Dimension(500,500));
 		jp.add(scrollPane);
         JButton button1 = new JButton("Избери година/месец");
-		Listener2 l2 = new Listener2(ev, employees,map,mapreverse);
+		RequestMonthSelectionListener l2 = new RequestMonthSelectionListener(ev, employees,map,mapreverse);
 		button1.addActionListener(l2);
 		c.gridx=0;
 		c.gridy=0;
@@ -85,7 +85,7 @@ public class ShiftsTopLevel {
 		p.add(button1,c);
 		
 		JButton button2 = new JButton("Изчисли");
-		button2.addActionListener(new Listener3(employees, map.keySet().size(),mapreverse,calendar));
+		button2.addActionListener(new InitiateCalculationListener(employees, map.keySet().size(),mapreverse,calendar));
 		c.gridx=2;
 		c.gridy=0;
 		c.gridwidth=2;

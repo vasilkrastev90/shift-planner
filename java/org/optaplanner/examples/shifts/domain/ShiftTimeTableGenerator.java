@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import org.optaplanner.examples.common.app.LoggingMain;
 import org.optaplanner.examples.common.persistence.AbstractSolutionImporter;
 import org.optaplanner.examples.shifts.views.EmployeeView;
-import org.optaplanner.examples.shifts.views.Listener2;
+import org.optaplanner.examples.shifts.views.listeners.RequestMonthSelectionListener;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;

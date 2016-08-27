@@ -25,7 +25,7 @@ public class EmployeeView extends JPanel {
 	this.calendar = calendar;
 	}
 
-	public void updateEV(ArrayList<Employee> employees, int year, int month, HashMap<Integer, Integer> workdays,
+	public void updateEV(ArrayList<Employee> employees, int year, int month, HashMap<Integer, Boolean> monthHolidays, HashMap<Integer, Integer> workdays,
 			HashMap<Integer, Integer> mapreverse) {
 		workdays.clear();
 		mapreverse.clear();
@@ -38,8 +38,7 @@ public class EmployeeView extends JPanel {
 		for (int i = 1; i <= daysInMonth; i++) {
 
 			calendar.set(year, month, i);
-			if (!(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
-					|| calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+			if (!monthHolidays.get(i)) {
 
 				workdays.put(Integer.valueOf(i), Integer.valueOf(workday));
 				mapreverse.put(workday, i);
@@ -51,7 +50,7 @@ public class EmployeeView extends JPanel {
 		add(new JLabel("Дата:" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR),JLabel.CENTER));
 		setLayout(new GridLayout(employees.size()+1, 2));
 		for (int i = 0; i < employees.size(); i++) {
-			cp[i] = new CalendarPanel(year, month, employees.get(i), workdays);
+			cp[i] = new CalendarPanel(year, month, employees.get(i), workdays,monthHolidays);
 			add(new JLabel(employees.get(i).getName(), JLabel.RIGHT));
 			add(cp[i]);
 		}

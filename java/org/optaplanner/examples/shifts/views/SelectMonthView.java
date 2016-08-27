@@ -1,7 +1,5 @@
 package org.optaplanner.examples.shifts.views;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,22 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.optaplanner.examples.shifts.domain.Employee;
+import org.optaplanner.examples.shifts.views.listeners.SelectWorkingDaysListener;
 
-public class Listener2 implements ActionListener{
+public class SelectMonthView {
 
-	HashMap<Integer,Integer> map;
-	HashMap<Integer,Integer> mapreverse;
-	EmployeeView ev;
-	ArrayList<Employee> list;
-	public Listener2(EmployeeView ev,ArrayList<Employee> list,HashMap<Integer,Integer> map,HashMap<Integer,Integer> mapreverse) {
-		this.ev = ev;
-		this.list = list;
-		this.map = map;
-		this.mapreverse = mapreverse;
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JFrame f = new JFrame();
+    	private HashMap<Integer, Boolean> monthHolidays;
+
+		public SelectMonthView(HashMap<Integer,Integer> workDaysMap,HashMap<Integer,Integer> workDaysMapReverse,EmployeeView employeeView,ArrayList<Employee> employeesList, HashMap<Integer, Boolean> monthHolidays) {
+    	this.monthHolidays = monthHolidays;
+    	JFrame f = new JFrame();
 		f.setSize(200, 200);
 		
 		JPanel p = new JPanel();
@@ -47,16 +38,16 @@ public class Listener2 implements ActionListener{
 			mapmonths.put(s, m);
 			m++;
 		}
-		Listener l = new Listener(f,listYears,mapyears,listMonths,mapmonths,ev,list,map,mapreverse);
+		//Listener l = new Listener(f,listYears,mapyears,listMonths,mapmonths,ev,list,workDaysMap,workDaysMapReverse);
+		SelectWorkingDaysListener selector = new SelectWorkingDaysListener(f,listYears,mapyears,listMonths,mapmonths,workDaysMap,workDaysMapReverse,monthHolidays,employeeView,employeesList);
 		JButton button = new JButton("Set");
-		button.addActionListener(l);
+		button.addActionListener(selector);
 		
 		p.add(listYears);
 		p.add(listMonths);
 		p.add(button);
 		f.add(p);
 		f.setVisible(true);
-		
 	}
 
 }
