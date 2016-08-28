@@ -1,5 +1,7 @@
 package org.optaplanner.examples.shifts.score;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
@@ -26,7 +28,8 @@ public class ShiftPlanningEasyScoreCalculator implements EasyScoreCalculator<Shi
 			Employee morning1 = shifts.get(i).getReceptionMorning1();
 			Employee afternoon0 = shifts.get(i).getReceptionAfternoon0();
 			Employee afternoon1 = shifts.get(i).getReceptionAfternoon1();
-
+			
+			
 			if (!shifts.get(i).allDifferent()) {
 				hardScore = hardScore - 1;
 				continue;
@@ -37,26 +40,31 @@ public class ShiftPlanningEasyScoreCalculator implements EasyScoreCalculator<Shi
 				hardScore = hardScore - 1;
 				continue;
 			}
+			
 
-//			int lookback = timetable.getEmployees().size() / 4;
-//			for (int j = i - 1; j >= 0 && j >= (i - lookback); j--) {
-//				if (shifts.get(j).getReceptionMorning0() == null || shifts.get(j).getReceptionMorning1() == null
-//						|| shifts.get(j).getReceptionAfternoon0() == null || shifts.get(j).getReceptionAfternoon1()==null)
-//					continue;
-//
-//				if (shifts.get(j).containsName(shifts.get(i).getReceptionMorning0().getName())) {
-//					softScore = softScore + (j - i);
-//				}
-//				if (shifts.get(j).containsName(shifts.get(i).getReceptionMorning1().getName())) {
-//					softScore = softScore + (j - i);
-//				}
-//				if (shifts.get(j).containsName(shifts.get(i).getReceptionAfternoon0().getName())) {
-//					softScore = softScore + (j - i);
-//				}
-//				if (shifts.get(j).containsName(shifts.get(i).getReceptionAfternoon1().getName())) {
-//					softScore = softScore + (j - i);
-//				}
-//			}
+
+			int lookback = i-1;
+			if (lookback>=0) {
+				Employee morning0Before = shifts.get(lookback).getReceptionMorning0();
+				Employee morning1Before = shifts.get(lookback).getReceptionMorning1();
+				Employee afternoon0Before = shifts.get(lookback).getReceptionAfternoon0();
+				Employee afternoon1Before = shifts.get(lookback).getReceptionAfternoon1();
+				Employee[] emparrayToday= {morning0,morning1,afternoon0,afternoon1};
+				Employee[] emparrayYesterday = {morning0Before,morning1Before,afternoon0Before,afternoon1Before};
+				ArrayList<Employee> TodayShifts = new ArrayList<Employee>(Arrays.asList(emparrayToday));
+				ArrayList<Employee> YesterdayShifts = new ArrayList<Employee>(Arrays.asList(emparrayYesterday));
+                for (Employee employee : YesterdayShifts) {
+					if(TodayShifts.contains(employee)) {
+						softScore= softScore-1;
+					}
+				}
+				
+				if (morning0Before == null || morning1Before == null || afternoon0Before == null || afternoon1Before == null) 
+					continue;
+				
+				
+		    }
+
 			
 			for (Employee employee : timetable.getEmployees()) {
 				
