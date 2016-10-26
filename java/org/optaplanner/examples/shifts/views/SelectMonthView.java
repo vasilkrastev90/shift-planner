@@ -48,6 +48,7 @@ public class SelectMonthView {
 		p.add(button);
 		f.add(p);
 		f.setVisible(true);
+		f.pack();
 	}
 
 }
