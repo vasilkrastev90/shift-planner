@@ -9,16 +9,16 @@
     <version>6.4.0.Final</version>
   </parent>
 
-  <artifactId>optaplanner-examples</artifactId>
+  
+  <groupId>com.vasilkrastev</groupId>
+  <artifactId>shift-planner</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
 
-  <name>OptaPlanner examples</name>
+  <name>Shift Planer</name>
   <description>
-    OptaPlanner solves planning problems.
-    This lightweight, embeddable planning engine implements powerful and scalable algorithms
-    to optimize business resource scheduling and planning.
-
-    This module contains the non-web examples which demonstrate how to use it in a normal Java application.
-  </description>
+    Shift planner is an app that can schedule shifts based on availability of resources.
+    </description>
 
   <repositories>
     <!-- TODO remove this once maven central replicates the jboss repository -->
