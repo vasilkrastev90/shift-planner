@@ -19,6 +19,9 @@
   <description>
     Shift planner is an app that can schedule shifts based on availability of resources.
     </description>
+   <properties>
+     <checkstyle.skip>true</checkstyle.skip>
+   </properties>
 
   <repositories>
     <!-- TODO remove this once maven central replicates the jboss repository -->
@@ -182,18 +185,34 @@
     <dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
-    	<version>2.7.6</version>
     </dependency>
     <dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-annotations</artifactId>
-    	<version>2.7.6</version>
     </dependency>
     <dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-core</artifactId>
-    	<version>2.7.6</version>
     </dependency>
   </dependencies>
 
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-databind</artifactId>
+  			<version>2.7.6</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-annotations</artifactId>
+  			<version>2.7.6</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.fasterxml.jackson.core</groupId>
+  			<artifactId>jackson-core</artifactId>
+  			<version>2.7.6</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>
