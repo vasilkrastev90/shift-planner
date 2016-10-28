@@ -22,7 +22,7 @@ public class CalendarPanel extends JPanel
 	  GregorianCalendar gc = new GregorianCalendar(year,month,day);
 	  String[] headers = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
 	  int weeks = gc.getActualMaximum(Calendar.WEEK_OF_MONTH);
-	  setLayout(new GridLayout(weeks + 2, 7));
+	  setLayout(new GridLayout(weeks + 1, 7));//changed weeks
 	  setBorder(BorderFactory.createEtchedBorder());
 	  for(int i = 0; i < 7; i++) add(new JLabel(headers[i],JLabel.CENTER));
 	  int dayofweek = gc.get(Calendar.DAY_OF_WEEK);
@@ -58,7 +58,7 @@ public class CalendarPanel extends JPanel
 	  GregorianCalendar gc = new GregorianCalendar(year,month,day);
 	  String[] headers = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
 	  int weeks = gc.getActualMaximum(Calendar.WEEK_OF_MONTH);
-	  setLayout(new GridLayout(weeks + 2, 7));
+	  setLayout(new GridLayout(weeks + 1, 7));//changed weeks
 	  setBorder(BorderFactory.createEtchedBorder());
 	  for(int i = 0; i < 7; i++) add(new JLabel(headers[i],JLabel.CENTER));
 	  int dayofweek = gc.get(Calendar.DAY_OF_WEEK);
