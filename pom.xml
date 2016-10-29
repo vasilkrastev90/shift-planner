@@ -47,13 +47,27 @@
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources/</directory>
-				 <includes>
-                 <include>employees.json</include>
-                 </includes>
+				<includes>
+					<include>org/optaplanner/examples/shifts/solver/employees.json</include>
+					<include>org/optaplanner/examples/shifts/solver/shiftsSolverConfig.xml</include>
+				</includes>
 			</resource>
 		</resources>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>org.optaplanner.examples.shifts.app.ShiftsTopLevel</mainClass>
+							</manifest>
+						</archive>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>

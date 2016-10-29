@@ -45,9 +45,9 @@ public class ShiftsTopLevel {
 		Calendar calendar = new GregorianCalendar();
 		try {
 			ClassLoader classLoader = new ShiftsTopLevel().getClass().getClassLoader();
-			employees = om.readValue(
-					new File(
-							classLoader.getResource("org/optaplanner/examples/shifts/solver/employees.json").getFile()),
+			System.out.println(classLoader);
+			System.out.println(classLoader.getResourceAsStream("org/optaplanner/examples/shifts/solver/employees.json"));
+			employees = om.readValue(classLoader.getResourceAsStream("org/optaplanner/examples/shifts/solver/employees.json"),
 					new TypeReference<ArrayList<Employee>>() {
 					});
 		} catch (JsonGenerationException e) {
